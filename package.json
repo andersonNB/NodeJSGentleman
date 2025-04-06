@@ -28,7 +28,7 @@
 		"valibot": "^1.0.0"
 	},
 	"scripts": {
-		"prepare": "husky"
+		"prepare": "husky install"
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx}": "eslint --fix"
