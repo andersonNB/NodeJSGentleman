@@ -86,3 +86,5 @@ export const revokeToken = (email: string): boolean => {
 	users.set(email, foundUser);
 	return true;
 };
+
+const hola = "mundo";
