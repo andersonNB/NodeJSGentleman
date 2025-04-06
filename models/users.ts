@@ -87,4 +87,4 @@ export const revokeToken = (email: string): boolean => {
 	return true;
 };
 
-const unusedToken = new Set<string>();
+const unusedToken = 23;
