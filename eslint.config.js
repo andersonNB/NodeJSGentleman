@@ -82,7 +82,7 @@ export default defineConfig([
 
       // Reemplazo más eficiente con eslint-plugin-unused-imports
       "unused-imports/no-unused-vars": [
-        "warn",
+        "error",
         {
           vars: "all",
           varsIgnorePattern: "^_",
@@ -90,7 +90,7 @@ export default defineConfig([
           argsIgnorePattern: "^_",
         },
       ],
-      "unused-imports/no-unused-imports": "warn",
+      "unused-imports/no-unused-imports": "error",
     },
   },
 ]);
