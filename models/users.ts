@@ -86,5 +86,3 @@ export const revokeToken = (email: string): boolean => {
 	users.set(email, foundUser);
 	return true;
 };
-
-const unUsedToken = 34;

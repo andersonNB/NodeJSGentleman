@@ -57,7 +57,7 @@ import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 import tsParser from "@typescript-eslint/parser";
 import unusedImports from "eslint-plugin-unused-imports";
-import airbnbBaseTypescript from "eslint-config-airbnb-typescript/base";
+import airbnbBaseTypescript from "eslint-config-airbnb-typescript/base.js";
 
 export default defineConfig([
   {
