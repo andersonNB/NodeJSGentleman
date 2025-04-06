@@ -21,12 +21,12 @@ export default defineConfig([
       ...tseslint.configs.recommended.rules,
       ...airbnbBaseTypescript.rules,
       // Mejora rendimiento: desactiva reglas duplicadas
-      "no-unused-vars": "off",
+      "no-unused-vars": "error",
       "@typescript-eslint/no-unused-vars": "off",
 
       // Reemplazo más eficiente con eslint-plugin-unused-imports
       "unused-imports/no-unused-vars": [
-        "warn",
+        "error",
         {
           vars: "all",
           varsIgnorePattern: "^_",
@@ -34,7 +34,7 @@ export default defineConfig([
           argsIgnorePattern: "^_",
         },
       ],
-      "unused-imports/no-unused-imports": "warn",
+      "unused-imports/no-unused-imports": "error",
     },
   },
 ]);
