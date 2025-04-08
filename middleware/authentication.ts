@@ -1,6 +1,7 @@
 import type {IncomingMessage, ServerResponse} from "http";
-import type {JwtPayload} from "jsonwebtoken";
+import {verify, type JwtPayload} from "jsonwebtoken";
 import {isTokenRevoked} from "../models";
+import config from "../config";
 
 export interface AuthenticatedRequest extends IncomingMessage {
 	user?: JwtPayload | string;
@@ -25,5 +26,15 @@ export const authenticateToken = async (
 		return false;
 	}
 
-	return true;
+	try {
+		const decoded = verify(token, config.jwtSecret);
+
+		req.user = decoded;
+
+		return true;
+	} catch {
+		res.statusCode = 403;
+		res.end("Forbidden: Invalid token");
+		return false;
+	}
 };
