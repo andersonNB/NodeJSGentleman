@@ -31,7 +31,10 @@
 		"valibot": "^1.0.0"
 	},
 	"scripts": {
-		"prepare": "husky"
+		"prepare": "husky",
+		"lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+		"lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+		"dev": "bun run index.ts"
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx}": "eslint --fix"

@@ -22,6 +22,8 @@ export const authRouter = async (req: IncomingMessage, res: ServerResponse) => {
 
 		const result = safeParse(authSchema, body);
 
+		console.log(body);
+
 		if (!result.issues) {
 			res.statusCode = 400;
 			res.end("Invalid request body");
@@ -34,11 +36,12 @@ export const authRouter = async (req: IncomingMessage, res: ServerResponse) => {
 			const user = await createUser(email, password);
 			res.statusCode = 201;
 			res.end(JSON.stringify(user));
+			return;
 		} catch (error) {
 			if (error instanceof Error) {
 				res.end(error.message);
 			} else {
-				res.end("Internal server error");
+				res.end(`Internal server error: ${error}`);
 			}
 		}
 	}
