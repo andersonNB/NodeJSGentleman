@@ -4,12 +4,15 @@ import {
 	createUser,
 	findUserByEmail,
 	HttpMethod,
+	revokeToken,
+	RevokeToken,
 	validatePassword,
 } from "../models";
 import {parseBody} from "../utils/parseBody";
 import {safeParse} from "valibot";
 import {sign} from "jsonwebtoken";
 import config from "../config";
+import type {AuthenticatedRequest} from "../middleware/authentication";
 
 export const authRouter = async (req: IncomingMessage, res: ServerResponse) => {
 	const {method, url} = req;
@@ -83,4 +86,33 @@ export const authRouter = async (req: IncomingMessage, res: ServerResponse) => {
 
 		return;
 	}
+
+	if (url === "auth/logout" && method === HttpMethod.POST) {
+		const token = req.headers["authorization"]?.split(" ")[1];
+
+		if (token) {
+			RevokeToken(token);
+
+			const formattedReq = req as AuthenticatedRequest;
+
+			if (
+				formattedReq.user &&
+				typeof formattedReq.user === "object" &&
+				"id" in formattedReq.user
+			) {
+				const result = revokeToken(formattedReq.user?.email);
+
+				if (!result) {
+					res.statusCode = 404;
+					res.end("User not found");
+				}
+			}
+
+			res.end("Logged out successfully");
+			return;
+		}
+	}
+
+	res.statusCode = 404;
+	res.end("Not Found");
 };
